@@ -53,17 +53,17 @@ typedef struct verticeFile {
 /**
  * Função que cria o Grafo.
  */
-Vertice* CriaGrafo(int* resultado);
+Vertice* CriaGrafo();
 
 /**
  * Função que cria um Vertice.
  */
-Vertice* CriaVertice(int* resultado);
+Vertice* CriaVertice(int* codigo, char* cidade, int* resultado);
 
 /**
  * Função que cria um Adjacente.
  */
-Adjacente* CriaAdjacente(int* resultado);
+Adjacente* CriaAdjacente(int* codV, int* codA, int* peso, int* resultado);
 
 /**
  * Função que insere um Vertice num Grafo.
@@ -74,6 +74,11 @@ Vertice* InserirVertice(Vertice* grafo, Vertice* v, int *resultado);
  * Função que insere um Adjacente numa lista de Adjacentes.
  */
 Adjacente* InserirAdjacente(Adjacente* listaAdjs, Adjacente* novoAdj, int* resultado);
+
+/**
+ * Função que insere um Adjacente num Grafo.
+ */
+Vertice* InserirAdjEmGrafo(Vertice* grafo, Adjacente* novoAdj, int* resultado);
 
 /**
  * Função que remove um Vertice de um Grafo, caso esteja presente no mesmo.

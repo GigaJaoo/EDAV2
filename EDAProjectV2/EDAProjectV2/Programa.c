@@ -60,6 +60,7 @@ int main() {
 
 	//Testes Funções Grafos
 	printf("Testes das funcoes dos Grafos\n");
+	Vertice* grafo1 = CriaGrafo();
 
-
+	
 }

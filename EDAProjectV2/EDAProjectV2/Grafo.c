@@ -11,25 +11,38 @@
 //NÃO SEI O QUE FAZER NESTES
 #pragma region CRIAR
 
+//DONE
  /**
   * Função que cria o Grafo.
   */
-Vertice* CriaGrafo(int* resultado) {
-
+Vertice* CriaGrafo() {
+	return NULL;
 }
 
+//DONE (TESTAR)
 /**
  * Função que cria um Vertice.
  */
-Vertice* CriaVertice(int* resultado) {
-
+Vertice* CriaVertice(int* codigo, char *cidade, int* resultado) {
+	Vertice* novo = (Vertice*)malloc(sizeof(Vertice));
+	novo->codigo = codigo;
+	strcpy(novo->cidade, cidade);
+	novo->adjs = NULL;
+	novo->nextVertice = NULL;
+	return novo;
 }
 
+//DONE (TESTAR)
 /**
  * Função que cria um Adjacente.
  */
-Adjacente* CriaAdjacente(int* resultado) {
-
+Adjacente* CriaAdjacente(int* codV, int* codA, int* peso, int* resultado) {
+	Adjacente* novo = (Adjacente*)malloc(sizeof(Adjacente));
+	novo->codigoVertice = codV;
+	novo->codigoAdj = codA;
+	novo->distancia = peso;
+	novo->nextAdj = NULL;
+	return novo;
 }
 
 #pragma endregion
@@ -144,6 +157,20 @@ Adjacente* InserirAdjacente(Adjacente* listaAdjs, Adjacente* novoAdj, int* resul
 	}
 	*resultado = 3;
 	return listaAdjs;
+}
+
+/**
+ * Função que insere um Adjacente num Grafo.
+ * 
+ * Retorna o Grafo com o Adjacente inserido na respetiva lista de Adjacentes.
+ * 
+ * Resultado = -1 caso o Grafo não possua Vertices.
+ */
+Vertice* InserirAdjEmGrafo(Vertice* grafo, Adjacente* novoAdj, int* resultado) {
+	if (grafo == NULL) {
+		*resultado = -1;
+		return 0;
+	}
 }
 
 //DONE (TESTAR)
@@ -759,6 +786,7 @@ Adjacente* LerAdjacenciasBin(char* fileName, int* resultado) {
  */
 int MostraGrafo(Vertice* grafo) {
 	if (grafo == NULL) {
+		printf("O grafo está vazio.\n");
 		return 0;
 	}
 	Vertice* aux = grafo;
