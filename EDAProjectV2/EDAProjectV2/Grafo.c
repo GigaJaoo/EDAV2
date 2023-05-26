@@ -8,22 +8,25 @@
 
 #include "Assinaturas.h"
 
-//NÃO SEI O QUE FAZER NESTES
 #pragma region CRIAR
 
-//DONE
+//DONE - WORKING
  /**
   * Função que cria o Grafo.
+  * 
+  * Retorna um Grafo vazio.
   */
 Vertice* CriaGrafo() {
 	return NULL;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que cria um Vertice.
+ * 
+ * Retorna o Vertice criado.
  */
-Vertice* CriaVertice(int* codigo, char *cidade, int* resultado) {
+Vertice* CriaVertice(int* codigo, char *cidade) {
 	Vertice* novo = (Vertice*)malloc(sizeof(Vertice));
 	novo->codigo = codigo;
 	strcpy(novo->cidade, cidade);
@@ -32,11 +35,13 @@ Vertice* CriaVertice(int* codigo, char *cidade, int* resultado) {
 	return novo;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que cria um Adjacente.
+ * 
+ * Retorna o Adjacente criado.
  */
-Adjacente* CriaAdjacente(int* codV, int* codA, int* peso, int* resultado) {
+Adjacente* CriaAdjacente(int* codV, int* codA, int* peso) {
 	Adjacente* novo = (Adjacente*)malloc(sizeof(Adjacente));
 	novo->codigoVertice = codV;
 	novo->codigoAdj = codA;
@@ -47,7 +52,7 @@ Adjacente* CriaAdjacente(int* codV, int* codA, int* peso, int* resultado) {
 
 #pragma endregion
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que insere um Vertice num Grafo.
  * 
@@ -103,7 +108,7 @@ Vertice* InserirVertice(Vertice* grafo, Vertice* v, int* resultado) {
 	return grafo;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que insere um Adjacente numa lista de Adjacentes.
  * 
@@ -159,21 +164,45 @@ Adjacente* InserirAdjacente(Adjacente* listaAdjs, Adjacente* novoAdj, int* resul
 	return listaAdjs;
 }
 
+//DONE - WORKING
 /**
  * Função que insere um Adjacente num Grafo.
  * 
  * Retorna o Grafo com o Adjacente inserido na respetiva lista de Adjacentes.
  * 
+ * Resultado = -2 caso a Adjacencia não corresponda a nenhum Vertice do Grafo.
  * Resultado = -1 caso o Grafo não possua Vertices.
+ * Resultado = 0 caso a Adjacencia já esteja no Grafo.
+ * Resultado = 1 caso insira a Adjacencia com sucesso.
  */
 Vertice* InserirAdjEmGrafo(Vertice* grafo, Adjacente* novoAdj, int* resultado) {
 	if (grafo == NULL) {
 		*resultado = -1;
 		return 0;
 	}
+	Vertice* aux = grafo;
+	int i;
+	while (aux != NULL) {
+		if (aux->codigo == novoAdj->codigoVertice) {
+			aux->adjs = InserirAdjacente(aux->adjs, novoAdj, &i);
+			if (i == -1) {
+				*resultado = 0;
+				return grafo;
+			}
+			else {
+				*resultado = 1;
+				return grafo;
+			}
+		}
+		else {
+			aux = aux->nextVertice;
+		}
+	}
+	*resultado = -2;
+	return grafo;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que remove um Vertice de um Grafo, caso esteja presente no mesmo.
  * 
@@ -189,6 +218,7 @@ Vertice* RemoverVertice(Vertice* grafo, Vertice* v, int* resultado) {
 		return grafo;
 	}
 	int i = ProcuraVertice(grafo, v);
+	int j;
 	if (i == 0) {
 		*resultado = 0;
 		return grafo;
@@ -199,6 +229,7 @@ Vertice* RemoverVertice(Vertice* grafo, Vertice* v, int* resultado) {
 		//Caso em que o Vértice removido é o primeiro elemento da lista de Vértices do Grafo
 		if (ComparaVertices(aux, v) == 1) {
 			grafo = aux->nextVertice;
+			DestroiAdjacencias(aux->adjs, &j);
 			free(aux);
 			*resultado = 1;
 			return grafo;
@@ -209,6 +240,7 @@ Vertice* RemoverVertice(Vertice* grafo, Vertice* v, int* resultado) {
 		while (aux != NULL) {
 			if (ComparaVertices(aux, v) == 1) {
 				anterior->nextVertice = aux->nextVertice;
+				DestroiAdjacencias(aux->adjs, &j);
 				free(aux);
 				*resultado = 1;
 				return grafo;
@@ -221,7 +253,7 @@ Vertice* RemoverVertice(Vertice* grafo, Vertice* v, int* resultado) {
 	}
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que verifica se um Vertice está presente num Grafo.
  * 
@@ -243,7 +275,7 @@ int ProcuraVertice(Vertice* grafo, Vertice* v) {
 	return 0;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que verifica se dois Vertices são iguais.
  * 
@@ -261,7 +293,7 @@ int ComparaVertices(Vertice* v1, Vertice* v2) {
 	}
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que remove um Adjacente da lista de Adjacentes recebida, se estiver presente na mesma.
  * 
@@ -309,7 +341,43 @@ Adjacente* RemoverAdjacente(Adjacente* listaAdjs, Adjacente* adjRemovido, int* r
 	}
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
+/**
+ * Função que remove um Adjacente de um Grafo.
+ * 
+ * Retorna o Grafo sem o Adjacente caso o consiga remover.
+ * 
+ * Resultado = -1 caso o Grafo esteja vazio.
+ * Resultado = 0 caso o Adjacente não esteja no Grafo.
+ * Resultado = 1 caso consiga remover o Adjacente com sucesso.
+ */
+Vertice* RemoverAdjGrafo(Vertice* grafo, Adjacente* adjRemovido, int* resultado) {
+	if (grafo == NULL) {
+		*resultado = -1;
+		return grafo;
+	}
+	Vertice* aux = grafo;
+	int i;
+	while (aux != NULL) {
+		if (aux->codigo == adjRemovido->codigoVertice) {
+			aux->adjs = RemoverAdjacente(aux->adjs, adjRemovido, &i);
+			if (i == 1) {
+				*resultado = 1;
+			}
+			else {
+				*resultado = 0;
+			}
+			return grafo;
+		}
+		else {
+			aux = aux->nextVertice;
+		}
+	}
+	*resultado = 0;
+	return grafo;
+}
+
+//DONE - WORKING
 /**
  * Função que verifica se um Adjacente está presente numa lista de Adjacentes.
  * 
@@ -331,7 +399,7 @@ int ProcuraAdjacente(Adjacente* listaAdjs, Adjacente* adj) {
 	return 0;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que verifica se dois Adjacentes são iguais.
  * 
@@ -350,56 +418,61 @@ int ComparaAdjacentes(Adjacente* a1, Adjacente* a2) {
 	}
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que destroi um Grafo.
  * 
- * Retorna 0 caso o Grafo esteja vazio.
- * Retorna 1 caso consiga destruir o Grafo.
+ * Retorna o Grafo a nulo
+ * 
+ * Resultado = 0 caso o Grafo já esteja a nulo.
+ * Resultado = 1 caso destrua o Grafo com sucesso.
  */
-int DestroiGrafo(Vertice* grafo) {
+Vertice* DestroiGrafo(Vertice* grafo, int* resultado) {
 	if (grafo == NULL) {
-		return 0;
+		*resultado = 0;
+		return NULL;
 	}
-	Vertice* aux = grafo;
-	Vertice* anterior = grafo;
+	Vertice* aux = NULL;
 	int i;
-	if (aux->nextVertice != NULL) {
-		aux = aux->nextVertice;
-		i = DestroiAdjacencias(anterior->adjs);
-		grafo = RemoverVertice(grafo, anterior, &i);
-		anterior = grafo;
+	while (grafo != NULL) {
+		if (grafo->nextVertice != NULL) {
+			aux = grafo->nextVertice;
+		}
+		grafo->adjs = DestroiAdjacencias(grafo->adjs, &i);
+		free(grafo);
+		grafo = aux;
+		aux = NULL;
 	}
-	else if (aux == NULL) {
-		i = DestroiAdjacencias(aux->adjs);
-		grafo = RemoverVertice(grafo, aux, &i);
-	}
-	return 1;
+	*resultado = 1;
+	return grafo;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que destroi uma lista de Adjacencias.
  * 
- * Retorna 0 caso a lista esteja vazia.
- * Retorna 1 caso consiga destruir a lista.
+ * Retorna a lista de Adjacencias a nulo.
+ * 
+ * Resultado = 0 caso a lista esteja vazia.
+ * Resultado = 1 caso destrua a Lista com sucesso.
  */
-int DestroiAdjacencias(Adjacente* adjs) {
+Adjacente* DestroiAdjacencias(Adjacente* adjs, int* resultado) {
 	if (adjs == NULL) {
-		return 0;
+		*resultado = 0;
+		return NULL;
 	}
-	Adjacente* aux = adjs;
-	Adjacente* anterior = adjs;
+	Adjacente* aux = NULL;
 	int i;
-	if (aux->nextAdj != NULL) {
-		aux = aux->nextAdj;
-		adjs = RemoverAdjacente(adjs, anterior, &i);
-		anterior = adjs;
+	while (adjs != NULL) {
+		if (adjs->nextAdj != NULL) {
+			aux = adjs->nextAdj;
+		}
+		free(adjs);
+		adjs = aux;
+		aux = NULL;
 	}
-	else if (aux->nextAdj == NULL) {
-		adjs = RemoverAdjacente(adjs, aux, &i);
-	}
-	return 1;
+	*resultado = 1;
+	return adjs;
 }
 
 #pragma region GUARDAR
@@ -777,7 +850,7 @@ Adjacente* LerAdjacenciasBin(char* fileName, int* resultado) {
 
 #pragma endregion
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que imprime todos os Vertices do Grafo e as suas Adjacencias.
  * 
@@ -786,7 +859,7 @@ Adjacente* LerAdjacenciasBin(char* fileName, int* resultado) {
  */
 int MostraGrafo(Vertice* grafo) {
 	if (grafo == NULL) {
-		printf("O grafo está vazio.\n");
+		printf("O grafo esta vazio.\n");
 		return 0;
 	}
 	Vertice* aux = grafo;
@@ -813,7 +886,7 @@ int MostraGrafo(Vertice* grafo) {
 	return 1;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que imprime as Adjacencias de um Vertice.
  * 

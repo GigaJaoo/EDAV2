@@ -58,12 +58,12 @@ Vertice* CriaGrafo();
 /**
  * Função que cria um Vertice.
  */
-Vertice* CriaVertice(int* codigo, char* cidade, int* resultado);
+Vertice* CriaVertice(int* codigo, char* cidade);
 
 /**
  * Função que cria um Adjacente.
  */
-Adjacente* CriaAdjacente(int* codV, int* codA, int* peso, int* resultado);
+Adjacente* CriaAdjacente(int* codV, int* codA, int* peso);
 
 /**
  * Função que insere um Vertice num Grafo.
@@ -101,6 +101,11 @@ int ComparaVertices(Vertice* v1, Vertice* v2);
 Adjacente* RemoverAdjacente(Adjacente* listaAdjs, Adjacente* adjRemovido, int* resultado);
 
 /**
+ * Função que remove um Adjacente de um Grafo.
+ */
+Vertice* RemoverAdjGrafo(Vertice* grafo, Adjacente* adjRemovido, int* resultado);
+
+/**
  * Função que verifica se um Adjacente está presente numa lista de Adjacentes.
  */
 int ProcuraAdjacente(Adjacente* listaAdjs, Adjacente* adj);
@@ -113,12 +118,12 @@ int ComparaAdjacentes(Adjacente* a1, Adjacente* a2);
 /**
  * Função que destroi um Grafo.
  */
-int DestroiGrafo(Vertice* grafo);
+Vertice* DestroiGrafo(Vertice* grafo, int* resultado);
 
 /**
  * Função que destroi uma lista de Adjacencias.
  */
-int DestroiAdjacencias(Adjacente* adjs);
+Adjacente* DestroiAdjacencias(Adjacente* adjs, int* resultado);
 
 /**
  * Função que guarda um Grafo em ficheiro de texto. (Não é necessário)

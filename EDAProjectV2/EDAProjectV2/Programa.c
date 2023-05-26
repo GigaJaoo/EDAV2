@@ -61,6 +61,123 @@ int main() {
 	//Testes Funções Grafos
 	printf("Testes das funcoes dos Grafos\n");
 	Vertice* grafo1 = CriaGrafo();
+	int res;
+
+	//Testes Vertices
+	int *cod1 = 13;
+	char cidade1[N];
+	strcpy(cidade1, "Barcelos");
+	Vertice* v1 = CriaVertice(cod1, cidade1);
+
+	int *cod2 = 27;
+	char cidade2[N];
+	strcpy(cidade2, "Porto");
+	Vertice* v2 = CriaVertice(cod2, cidade2);
+
+	int* cod3 = 5;
+	char cidade3[N];
+	strcpy(cidade3, "Lisboa");
+	Vertice* v3 = CriaVertice(cod3, cidade3);
+
+	int* cod4 = 49;
+	char cidade4[N];
+	strcpy(cidade4, "Algarve");
+	Vertice* v4 = CriaVertice(cod4, cidade4);
+
+	int* cod5 = 31;
+	char cidade5[N];
+	strcpy(cidade5, "Castelo Branco");
+	Vertice* v5 = CriaVertice(cod5, cidade5);
+
+	printf("\n");
+	printf("Resultados da Insercao dos Vertices no Grafo:\n");
+
+	grafo1 = InserirVertice(grafo1, v1, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirVertice(grafo1, v2, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirVertice(grafo1, v1, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirVertice(grafo1, v3, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirVertice(grafo1, v4, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirVertice(grafo1, v5, &res);
+	printf("%d.\n", res);
+	printf("\n");
+
+	MostraGrafo(grafo1);
+	printf("\n");
+
+	//Testes Adjacencias
+	int* peso1 = 13;
+	Adjacente* a1 = CriaAdjacente(cod1, cod4, peso1);
+	int* peso2 = 47;
+	Adjacente* a2 = CriaAdjacente(cod1, cod5, peso2);
+	int* peso3 = 68;
+	Adjacente* a3 = CriaAdjacente(cod4, cod3, peso3);
+	int* peso4 = 50;
+	Adjacente* a4 = CriaAdjacente(cod3, cod4, peso4);
+	int* peso5 = 21;
+	Adjacente* a5 = CriaAdjacente(cod2, cod1, peso5);
+	int* peso6 = 12;
+	Adjacente* a6 = CriaAdjacente(cod2, cod5, peso6);
+
+	int* pesoErrado = 152;
+	int* codErrado = 83;
+	Adjacente* aErrado = CriaAdjacente(codErrado, cod1, pesoErrado);
+
+	printf("Resultados da Insercao de Adjacentes no Grafo:\n");
+	grafo1 = InserirAdjEmGrafo(grafo1, a1, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, a2, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, a3, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, a4, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, a5, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, a6, &res);
+	printf("%d.\n", res);
+	grafo1 = InserirAdjEmGrafo(grafo1, aErrado, &res);
+	printf("%d.\n", res);
+	printf("\n");
+
+	/*v1->adjs = InserirAdjacente(v1->adjs, a1, &res);
+	printf("%d.\n", res);
+	v1->adjs = InserirAdjacente(v1->adjs, a2, &res);
+	printf("%d.\n", res);
+	v4->adjs = InserirAdjacente(v4->adjs, a3, &res);
+	printf("%d.\n", res);
+	v3->adjs = InserirAdjacente(v3->adjs, a4, &res);
+	printf("%d.\n", res);
+	v2->adjs = InserirAdjacente(v2->adjs, a5, &res);
+	printf("%d.\n", res);
+	v2->adjs = InserirAdjacente(v2->adjs, a6, &res);
+	printf("%d.\n", res);
+	printf("\n");*/
+
+	MostraGrafo(grafo1);
+
+	//Teste das funções de Remoção - WORKING
+	printf("\n");
+	printf("Teste das funcoes de destruicao.\n");
+	grafo1 = RemoverVertice(grafo1, v1, &res);
+	printf("%d.\n", res);
+	grafo1 = RemoverAdjGrafo(grafo1, a6, &res);
+	printf("%d.\n", res);
+	printf("\n");
+
+	MostraGrafo(grafo1);
+
+	//Teste da Destruição do Grafo - WORKING
+	printf("\n");
+	grafo1 = DestroiGrafo(grafo1, &res);
+	printf("Destruicao do Grafo - resultado = %d.\n", res);
+	printf("\n");
+
+	MostraGrafo(grafo1);
 
 	
 }
