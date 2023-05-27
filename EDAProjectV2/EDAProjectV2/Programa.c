@@ -57,7 +57,7 @@ int main() {
 
 	printf("\nForam imprimidos %d clientes.\n", ImprimirClientes(inicioClientes));
 	*/
-
+	
 	//Testes Funções Grafos
 	printf("Testes das funcoes dos Grafos\n");
 	Vertice* grafo1 = CriaGrafo();
@@ -106,8 +106,8 @@ int main() {
 	printf("%d.\n", res);
 	printf("\n");
 
-	MostraGrafo(grafo1);
-	printf("\n");
+	//MostraGrafo(grafo1);
+	//printf("\n");
 
 	//Testes Adjacencias
 	int* peso1 = 13;
@@ -144,22 +144,9 @@ int main() {
 	printf("%d.\n", res);
 	printf("\n");
 
-	/*v1->adjs = InserirAdjacente(v1->adjs, a1, &res);
-	printf("%d.\n", res);
-	v1->adjs = InserirAdjacente(v1->adjs, a2, &res);
-	printf("%d.\n", res);
-	v4->adjs = InserirAdjacente(v4->adjs, a3, &res);
-	printf("%d.\n", res);
-	v3->adjs = InserirAdjacente(v3->adjs, a4, &res);
-	printf("%d.\n", res);
-	v2->adjs = InserirAdjacente(v2->adjs, a5, &res);
-	printf("%d.\n", res);
-	v2->adjs = InserirAdjacente(v2->adjs, a6, &res);
-	printf("%d.\n", res);
-	printf("\n");*/
-
 	MostraGrafo(grafo1);
 
+	/*
 	//Teste das funções de Remoção - WORKING
 	printf("\n");
 	printf("Teste das funcoes de destruicao.\n");
@@ -171,6 +158,19 @@ int main() {
 
 	MostraGrafo(grafo1);
 
+	//Testes das funções de Guardar em ficheiros - ALL WORKING
+	printf("\n");
+	printf("Testes das Funcoes de Guardar em Ficheiros.\n");
+	char fileName[20];
+	strcpy(fileName, "Grafo1");
+	res = SaveGrafo(grafo1, fileName);
+	printf("%d.\n", res);
+	char fileNameBin[20];
+	strcpy(fileNameBin, "Grafo1Bin");
+	res = SaveGrafoBin(grafo1, fileNameBin);
+	printf("%d.\n", res);
+	printf("\n");
+
 	//Teste da Destruição do Grafo - WORKING
 	printf("\n");
 	grafo1 = DestroiGrafo(grafo1, &res);
@@ -179,5 +179,29 @@ int main() {
 
 	MostraGrafo(grafo1);
 
+	//Teste das Funções de Leitura de ficheiros binários - WORKING
+	printf("\n");
+	printf("Teste das Funcoes de Leitura de Ficheiros Binarios.\n");
+	grafo1 = LerGrafoBin(grafo1, fileNameBin, &res);
+	printf("%d.\n", res);
+	printf("\n");
+	MostraGrafo(grafo1);
+
+	//Volto a Destruir o Grafo
+	printf("\n");
+	grafo1 = DestroiGrafo(grafo1, &res);
+	printf("Destruicao do Grafo - resultado = %d.\n", res);
+	printf("\n");
+
+	MostraGrafo(grafo1);
+
+	//Teste das Funções de Leitura de ficheiros de texto - NOT WORKING
 	
+	printf("\n");
+	printf("Teste das Funcoes de Leitura de Ficheiros de Texto.\n");
+	grafo1 = LerGrafo(grafo1, fileName, &res);
+	printf("%d.\n", res);
+	printf("\n");
+	MostraGrafo(grafo1);
+	*/
 }

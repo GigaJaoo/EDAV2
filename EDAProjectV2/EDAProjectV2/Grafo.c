@@ -475,9 +475,10 @@ Adjacente* DestroiAdjacencias(Adjacente* adjs, int* resultado) {
 	return adjs;
 }
 
+//ALL DONE AND WORKING
 #pragma region GUARDAR
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que guarda um Grafo em ficheiros de textos.
  * 
@@ -503,7 +504,7 @@ int SaveGrafo(Vertice* grafo, char* fileName) {
 			if (j == 0) {
 				return 0;
 			}
-			else if (j == 1) {
+			else {
 				aux = aux->nextVertice;
 			}
 		}
@@ -511,6 +512,7 @@ int SaveGrafo(Vertice* grafo, char* fileName) {
 	return 1;
 }
 
+//DONE - WORKING
 /**
  * Função que guarda um Grafo em ficheiro Binário.
  * 
@@ -537,7 +539,7 @@ int SaveGrafoBin(Vertice* grafo, char* fileName) {
 			if (j == 0) {
 				return 0;
 			}
-			else if (j == 1) {
+			else {
 				aux = aux->nextVertice;
 			}
 		}
@@ -545,7 +547,7 @@ int SaveGrafoBin(Vertice* grafo, char* fileName) {
 	return 1;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que guarda os Vertices de um Grafo em ficheiro de texto. (Não é necessário)
  * 
@@ -571,7 +573,7 @@ int SaveVertices(Vertice* grafo, char* fileName) {
 	return 1;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que guarda os Vertices de um Grafo em ficheiro Binário.
  * 
@@ -584,23 +586,23 @@ int SaveVerticesBin(Vertice* grafo, char* fileName) {
 		return -1;
 	}
 	Vertice* aux = grafo;
-	VerticeFile* v = NULL;
+	VerticeFile v;
 	FILE* fVerticesBin;
 	fVerticesBin = fopen(fileName, "wb");
 	if (fVerticesBin == NULL) {
 		return 0;
 	}
 	while (aux != NULL) {
-		v->codigo = aux->codigo;
-		strcpy(v->cidade, aux->cidade);
-		fwrite(v, 1, sizeof(VerticeFile), fVerticesBin);
+		v.codigo = aux->codigo;
+		strcpy(v.cidade, aux->cidade);
+		fwrite(&v, 1, sizeof(VerticeFile), fVerticesBin);
 		aux = aux->nextVertice;
 	}
 	fclose(fVerticesBin);
 	return 1;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que guarda uma lista de Adjacencias em ficheiro de texto.
  * 
@@ -626,7 +628,7 @@ int SaveAdjacencias(Adjacente* adjs, char* fileName) {
 	return 1;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que guarda uma lista de Adjacentes em ficheiro Binário.
  * 
@@ -639,17 +641,17 @@ int SaveAdjacenciasBin(Adjacente* adjs, char* fileName) {
 		return -1;
 	}
 	Adjacente* aux = adjs;
-	AdjFile* a = NULL;
+	AdjFile a;
 	FILE* fAdjBin;
 	fAdjBin = fopen(fileName, "wb");
 	if (fAdjBin == NULL) {
 		return 0;
 	}
 	while (aux != NULL) {
-		a->codigoVertice = aux->codigoVertice;
-		a->codigoAdj = aux->codigoAdj;
-		a->distancia = aux->distancia;
-		fwrite(a, 1, sizeof(AdjFile), fAdjBin);
+		a.codigoVertice = aux->codigoVertice;
+		a.codigoAdj = aux->codigoAdj;
+		a.distancia = aux->distancia;
+		fwrite(&a, 1, sizeof(AdjFile), fAdjBin);
 		aux = aux->nextAdj;
 	}
 	fclose(fAdjBin);
@@ -658,9 +660,10 @@ int SaveAdjacenciasBin(Adjacente* adjs, char* fileName) {
 
 #pragma endregion
 
+//ALL DONE - Leitura de texto NOT WORKING; Binario - WORKING
 #pragma region LER
 
-//DONE (TESTAR)
+//DONE - NOT WORKING
 /**
  * Função que lê um Grafo a partir de ficheiros de textos.
  * 
@@ -669,11 +672,10 @@ int SaveAdjacenciasBin(Adjacente* adjs, char* fileName) {
  * Resultado = 0 caso não consiga abrir algum ficheiro.
  * Resultado = 1 caso consiga ler o Grafo com sucesso.
  */
-Vertice* LerGrafo(char* fileName, int* resultado) {
-	Vertice* grafo = NULL;
+Vertice* LerGrafo(Vertice* grafo, char* fileName, int* resultado) {
 	Vertice* aux;
 	int i, j;
-	grafo = LerVertices(fileName, &i);
+	grafo = LerVertices(grafo, fileName, &i);
 	if (i == 0) {
 		*resultado = 0;
 		return NULL;
@@ -681,32 +683,28 @@ Vertice* LerGrafo(char* fileName, int* resultado) {
 	else if (i == 1) {
 		aux = grafo;
 		while (aux != NULL) {
-			aux->adjs = LerAdjacencias(aux->cidade, &j);
-			if (j == 0) {
-				*resultado = 0;
-				return NULL;
-			}
-			else if (j == 1) {
-				aux = aux->nextVertice;
-			}
+			aux->adjs = LerAdjacencias(aux->adjs, aux->cidade, &j);
+			aux = aux->nextVertice;
 		}
 	}
 	*resultado = 1;
 	return grafo;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que lê um Grafo a partir de ficheiros Binários.
  * 
  * Retorna o Grafo, caso o consiga ler
+ * 
+ * Resultado = 0 caso não consiga abrir algum ficheiro.
+ * Resultado = 1 caso consiga ler o Grafo com sucesso.
  */
-Vertice* LerGrafoBin(char* fileName, int* resultado) {
-	Vertice* grafo = NULL;
+Vertice* LerGrafoBin(Vertice* grafo, char* fileName, int* resultado) {
 	Vertice* aux;
 	int i, j;
 	char fileBin[N];
-	grafo = LerVerticesBin(fileName, &i);
+	grafo = LerVerticesBin(grafo, fileName, &i);
 	if (i == 0) {
 		*resultado = 0;
 		return NULL;
@@ -716,21 +714,15 @@ Vertice* LerGrafoBin(char* fileName, int* resultado) {
 		while (aux != NULL) {
 			strcpy(fileBin, aux->cidade);
 			strcat(fileBin, "Bin");
-			aux->adjs = LerAdjacenciasBin(fileBin, &j);
-			if (j == 0) {
-				*resultado = 0;
-				return NULL;
-			}
-			else if (j == 1) {
-				aux = aux->nextVertice;
-			}
+			aux->adjs = LerAdjacenciasBin(aux->adjs, fileBin, &j);
+			aux = aux->nextVertice;
 		}
 	}
 	*resultado = 1;
 	return grafo;
 }
 
-//DONE (TESTAR)
+//DONE - NOT WORKING
 /**
  * Função que lê uma lista de Vertices a partir de um ficheiro de texto.
  * 
@@ -739,26 +731,27 @@ Vertice* LerGrafoBin(char* fileName, int* resultado) {
  * Resultado = 0 caso não consiga abrir o ficheiro.
  * Resultado = 1 caso consiga ler a lista com sucesso.
  */
-Vertice* LerVertices(char* fileName, int* resultado) {
-	Vertice* head = NULL;
+Vertice* LerVertices(Vertice* head, char* fileName, int* resultado) {
 	FILE* fVertices;
 	int i;
 	fVertices = fopen(fileName, "r");
 	if (fVertices == NULL) {
 		*resultado = 0;
-		return 0;
+		return NULL;
 	}
-	Vertice aux;
+	VerticeFile aux;
+	Vertice* novo;
 	while (!feof(fVertices)) {
 		fscanf(fVertices, "%d;%s\n", &aux.codigo, aux.cidade);
-		head = InserirVertice(head, &aux, &i);
+		novo = CriaVertice(aux.codigo, aux.cidade);
+		head = InserirVertice(head, novo, &i);
 	}
 	fclose(fVertices);
 	*resultado = 1;
 	return head;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que lê uma lista de Vertices a partir de um ficheiro Binário.
  * 
@@ -767,21 +760,19 @@ Vertice* LerVertices(char* fileName, int* resultado) {
  * Resultado = 0 caso não consiga abrir o ficheiro.
  * Resultado = 1 caso consiga ler a lista com sucesso.
  */
-Vertice* LerVerticesBin(char* fileName, int* resultado) {
-	Vertice* head = NULL;
+Vertice* LerVerticesBin(Vertice* head, char* fileName, int* resultado) {
 	FILE* fVerticesBin;
 	int i;
 	fVerticesBin = fopen(fileName, "rb");
 	if (fVerticesBin == NULL) {
 		*resultado = 0;
-		return 0;
+		return NULL;
 	}
-	VerticeFile aux1;
-	Vertice* aux2 = NULL;
-	while (fread(&aux1, 1, sizeof(VerticeFile), fVerticesBin)) {
-		strcpy(aux2->cidade, aux1.cidade);
-		aux2->codigo = aux1.codigo;
-		head = InserirVertice(head, aux2, &i);
+	VerticeFile aux;
+	Vertice* novo;
+	while (fread(&aux, 1, sizeof(VerticeFile), fVerticesBin)) {
+		novo = CriaVertice(aux.codigo, aux.cidade);
+		head = InserirVertice(head, novo, &i);
 	}
 	fclose(fVerticesBin);
 	*resultado = 1;
@@ -789,7 +780,7 @@ Vertice* LerVerticesBin(char* fileName, int* resultado) {
 
 }
 
-//DONE (TESTAR)
+//DONE - NOT WORKING
 /**
  * Função que lê uma lista de Adjacencias a partir de um ficheiro de texto.
  * 
@@ -798,26 +789,27 @@ Vertice* LerVerticesBin(char* fileName, int* resultado) {
  * Resultado = 0 caso não consiga abrir o ficheiro.
  * Resultado = 1 caso consiga ler a lista com sucesso.
  */
-Adjacente* LerAdjacencias(char* fileName, int* resultado) {
-	Adjacente* head = NULL;
+Adjacente* LerAdjacencias(Adjacente* head, char* fileName, int* resultado) {
 	FILE* fAdjs;
 	int i;
 	fAdjs = fopen(fileName, "r");
 	if (fAdjs == NULL) {
 		*resultado = 0;
-		return 0;
+		return NULL;
 	}
-	Adjacente aux;
+	AdjFile aux;
+	Adjacente* novo;
 	while (!feof(fAdjs)) {
 		fscanf(fAdjs, "%d;%d;%d\n", &aux.codigoVertice, &aux.codigoAdj, &aux.distancia);
-		head = InserirAdjacente(head, &aux, &i);
+		novo = CriaAdjacente(aux.codigoVertice, aux.codigoAdj, aux.distancia);
+		head = InserirAdjacente(head, novo, &i);
 	}
 	fclose(fAdjs);
 	*resultado = 1;
 	return head;
 }
 
-//DONE (TESTAR)
+//DONE - WORKING
 /**
  * Função que lê uma lista de Adjacencias a partir de um ficheiro Binário.
  * 
@@ -826,8 +818,7 @@ Adjacente* LerAdjacencias(char* fileName, int* resultado) {
  * Resultado = 0 caso não consiga abrir o ficheiro.
  * Resultado = 1 caso leia a lista com sucesso.
  */
-Adjacente* LerAdjacenciasBin(char* fileName, int* resultado) {
-	Adjacente* head = NULL;
+Adjacente* LerAdjacenciasBin(Adjacente* head, char* fileName, int* resultado) {
 	FILE* fAdjsBin;
 	int i;
 	fAdjsBin = fopen(fileName, "rb");
@@ -835,13 +826,11 @@ Adjacente* LerAdjacenciasBin(char* fileName, int* resultado) {
 		*resultado = 0;
 		return 0;
 	}
-	AdjFile aux1;
-	Adjacente* aux2 = NULL;
-	while (fread(&aux1, 1, sizeof(AdjFile), fAdjsBin)) {
-		aux2->codigoVertice = aux1.codigoVertice;
-		aux2->codigoAdj = aux1.codigoAdj;
-		aux2->distancia = aux1.distancia;
-		head = InserirAdjacente(head, aux2, &i);
+	AdjFile aux;
+	Adjacente* novo;
+	while (fread(&aux, 1, sizeof(AdjFile), fAdjsBin)) {
+		novo = CriaAdjacente(aux.codigoVertice, aux.codigoAdj, aux.distancia);
+		head = InserirAdjacente(head, novo, &i);
 	}
 	fclose(fAdjsBin);
 	*resultado = 1;

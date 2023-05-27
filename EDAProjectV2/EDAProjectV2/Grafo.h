@@ -158,32 +158,32 @@ int SaveAdjacenciasBin(Adjacente* adjs, char* fileName);
 /**
  * Função que lê um Grafo a partir de um ficheiro de texto.
  */
-Vertice* LerGrafo(char* fileName, int* resultado);
+Vertice* LerGrafo(Vertice* grafo, char* fileName, int* resultado);
 
 /**
  * Função que lê um Grafo a partir de um ficheiro Binário.
  */
-Vertice* LerGrafoBin(char* fileName, int* resultado);
+Vertice* LerGrafoBin(Vertice* grafo, char* fileName, int* resultado);
 
 /**
  * Função que lê uma lista de Vertices a partir de um ficheiro de texto.
  */
-Vertice* LerVertices(char* fileName, int* resultado);
+Vertice* LerVertices(Vertice* head, char* fileName, int* resultado);
 
 /**
  * Função que lê uma lista de Vertices a partir de um ficheiro Binário.
  */
-Vertice* LerVerticesBin(char* fileName, int* resultado);
+Vertice* LerVerticesBin(Vertice* head, char* fileName, int* resultado);
 
 /**
  * Função que lê uma lista de Adjacencias a partir de um ficheiro de texto.
  */
-Adjacente* LerAdjacencias(char* fileName, int* resultado);
+Adjacente* LerAdjacencias(Adjacente* head, char* fileName, int* resultado);
 
 /**
  * Função que lê uma lista de Adjacencias a partir de um ficheiro Binário.
  */
-Adjacente* LerAdjacenciasBin(char* fileName, int* resultado);
+Adjacente* LerAdjacenciasBin(Adjacente* head, char* fileName, int* resultado);
 
 /**
  * Função que imprime todos os Vertices do Grafo e as suas Adjacencias.
