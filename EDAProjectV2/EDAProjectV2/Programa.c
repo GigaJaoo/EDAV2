@@ -204,4 +204,22 @@ int main() {
 	printf("\n");
 	MostraGrafo(grafo1);
 	*/
+
+	char fileName[20];
+	strcpy(fileName, "Grafo1");
+	res = SaveGrafo(grafo1, fileName);
+	printf("Guardar o grafo em ficheiro de texto: %d.\n", res);
+
+	printf("\n");
+	grafo1 = DestroiGrafo(grafo1, &res);
+	printf("Destruicao do Grafo - resultado = %d.\n", res);
+	printf("\n");
+	
+	MostraGrafo(grafo1);
+
+	printf("\n");
+	grafo1 = LerGrafo(grafo1, fileName, &res);
+	printf("Resultado da leitura: %d.\n", res);
+
+	MostraGrafo(grafo1);
 }

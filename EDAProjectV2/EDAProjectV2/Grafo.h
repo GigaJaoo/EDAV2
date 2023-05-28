@@ -200,4 +200,3 @@ int MostraAdjs(Adjacente* adjs);
  * Função que coloca todos os Vertices como Não visitados.
  */
 Vertice* ResestVerticesVisitados(Vertice* grafo, int* resultado);
-

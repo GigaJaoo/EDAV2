@@ -293,7 +293,8 @@ int ComparaMeios(Meio* m1, Meio* m2) {
 	if ((m1->id == m2->id) &&
 		(m1->autonomia == m2->autonomia) &&
 		(m1->tipo == m2->tipo) &&
-		(m1->alugado == m2->alugado)
+		(m1->disponivel == m2->disponivel) &&
+		(m1->geocodigo == m2->geocodigo)
 		) {
 		return 1;
 	}

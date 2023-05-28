@@ -1,15 +1,25 @@
-﻿  Programa.c
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(67,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(72,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(77,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(82,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(87,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(113,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(115,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(117,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(119,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(121,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(123,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(126,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
-C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Programa.c(127,7): warning C4047: 'initializing': 'int *' differs in levels of indirection from 'int'
+﻿  Grafo.c
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(31,23): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(46,28): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(47,24): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(48,24): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(465,6): warning C4101: 'i': unreferenced local variable
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(745,32): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(745,25): warning C4024: 'CriaVertice': different types for formal and actual parameter 1
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(773,32): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(773,25): warning C4024: 'CriaVertice': different types for formal and actual parameter 1
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,41): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,27): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 1
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,56): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,46): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 2
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,71): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(802,61): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 3
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,41): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,27): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 1
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,56): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,46): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 2
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,71): warning C4047: 'function': 'int *' differs in levels of indirection from 'int'
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(830,61): warning C4024: 'CriaAdjacente': different types for formal and actual parameter 3
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(254): warning C4715: 'RemoverVertice': not all control paths return a value
+C:\Users\jotam\EDAV2\EDAProjectV2\EDAProjectV2\Grafo.c(342): warning C4715: 'RemoverAdjacente': not all control paths return a value
   EDAProjectV2.vcxproj -> C:\Users\jotam\EDAV2\EDAProjectV2\x64\Debug\EDAProjectV2.exe

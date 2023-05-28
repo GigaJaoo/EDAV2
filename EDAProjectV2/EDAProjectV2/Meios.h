@@ -31,7 +31,8 @@ typedef struct meiosMobilidadeEletricos {
 	int id;
 	int autonomia;
 	TipoTransporte tipo;
-	bool alugado;
+	bool disponivel;
+	int geocodigo;
 } Meio;
 
 /**

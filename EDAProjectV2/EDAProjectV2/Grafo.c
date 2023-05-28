@@ -913,7 +913,7 @@ Vertice* ResestVerticesVisitados(Vertice* grafo, int* resultado) {
 		*resultado = 0;
 		return grafo;
 	}
-	Vertice* aux;
+	Vertice* aux = grafo;
 	while (aux != NULL) {
 		aux->visitado = false;
 		aux = aux->nextVertice;
