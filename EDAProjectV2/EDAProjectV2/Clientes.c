@@ -27,7 +27,7 @@ int ArmazenarClientes(ListaClientes* head, char fileName[]) {
 		return (-1);
 	}
 	while (aux != NULL) {
-		fprintf(fClientes, "%d;%d;%f;%s;%s\n", aux->cliente->nif, aux->cliente->idade, aux->cliente->saldo, aux->cliente, aux->cliente->nome, aux->cliente->morada);
+		fprintf(fClientes, "%d;%d;%f;%s;%s\n", aux->cliente->nif, aux->cliente->idade, aux->cliente->saldo, aux->cliente->nome, aux->cliente->morada);
 		aux = aux->nextCliente;
 	}
 	fclose(fClientes);
@@ -74,12 +74,10 @@ ListaClientes* LerClientes(char fileName[], int *resultado) {
 		resultado = 0;
 		return 0;
 	}
-
-	Cliente aux;              //Não é apontador
-
+	Cliente aux;
 	while (!feof(fClientes)) {
-		fscanf(fClientes, "%d;%d;%f;[^;];%s\n", &aux.nif, &aux.idade, &aux.saldo, aux.nome, aux.morada); //Nas strings não precisa de &
-		head = InserirClientes(head, &aux, &i);             //no fscanf utilizar . em vez de ->
+		fscanf(fClientes, "%d;%d;%f;[^;];%s\n", &aux.nif, &aux.idade, &aux.saldo, aux.nome, aux.morada);
+		head = InserirClientes(head, &aux, &i);
 	}
 	fclose(fClientes);
 	resultado = 1;
@@ -197,7 +195,6 @@ ListaClientes* RemoverClientes(ListaClientes* head, Cliente* clienteRemovido, in
 			*resultado = 1;
 			return head;
 		}
-
 		//Caso em que o cliente removido está no meio ou no fim da lista.
 		aux = aux->nextCliente;
 		while (aux != NULL) {

@@ -131,6 +131,7 @@
     <ClCompile Include="Gestores.c" />
     <ClCompile Include="Grafo.c" />
     <ClCompile Include="Meios.c" />
+    <ClCompile Include="Paths.c" />
     <ClCompile Include="Programa.c" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Gestores.h" />
     <ClInclude Include="Grafo.h" />
     <ClInclude Include="Meios.h" />
+    <ClInclude Include="Paths.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,3 +12,4 @@
 #include "Gestores.h"
 #include "Meios.h"
 #include "Grafo.h"
+#include "Paths.h"

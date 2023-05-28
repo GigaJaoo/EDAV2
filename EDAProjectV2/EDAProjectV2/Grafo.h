@@ -38,6 +38,7 @@ typedef struct adjFile {
 typedef struct vertice {
 	int codigo;
 	char cidade[N];
+	bool visitado;
 	struct vertice* nextVertice;
 	Adjacente* adjs;         //Lista das adjacencias
 } Vertice;
@@ -194,3 +195,9 @@ int MostraGrafo(Vertice* grafo);
  * Função que imprime as Adjacencias de um Vertice.
  */
 int MostraAdjs(Adjacente* adjs);
+
+/**
+ * Função que coloca todos os Vertices como Não visitados.
+ */
+Vertice* ResestVerticesVisitados(Vertice* grafo, int* resultado);
+

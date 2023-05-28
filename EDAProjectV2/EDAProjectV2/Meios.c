@@ -27,7 +27,7 @@ int ArmazenarMeios(ListaMeios* head, char fileName[]) {
 		return (-1);
 	}
 	while (aux != NULL) {
-		fprintf(fMeios, "%d;%d;%d\n", aux->meio->autonomia, aux->meio->geocodigo, (int)aux->meio->tipo);        //duvida de como ficará escrito o tipo de transporte
+		fprintf(fMeios, "%d;%d;%d\n", aux->meio->id, aux->meio->autonomia, (int)aux->meio->tipo);
 		aux = aux->nextMeio;
 	}
 	fclose(fMeios);
@@ -82,7 +82,7 @@ ListaMeios* LerMeios(char fileName[], int* resultado) {
 	Meio aux;      //Não é apontador aqui
 	int transporte;
 	while (!feof(fMeios)) {
-		fscanf(fMeios, "%d;%d;%d\n", &aux.autonomia, &aux.geocodigo, &transporte);             //utilizar . em vez de -> no fscanf
+		fscanf(fMeios, "%d;%d;%d\n", &aux.id, &aux.autonomia, &transporte);
 		aux.tipo = (TipoTransporte)transporte;
 		head = InserirMeios(head, &aux, &i);
 	}
@@ -109,8 +109,7 @@ ListaMeios* LerMeiosBin(char fileName[], int* resultado) {
 		resultado = 0;
 		return 0;
 	}
-
-	Meio aux;          //Nao é apontador aqui
+	Meio aux;
 	while (fread(&aux, 1, sizeof(Meio), fMeiosBin)) {
 		head = InserirMeios(head, &aux, &i);
 	}
@@ -239,7 +238,6 @@ int ImprimirMeios(ListaMeios* head) {
 		printf("Meio %d:\n", i + 1);
 		printf("ID: %d\n", aux->meio->id);
 		printf("Autonomia: %d\n", aux->meio->autonomia);
-		printf("Geocodigo: %d\n", aux->meio->geocodigo);
 
 		if (aux->meio->tipo == trotinete) {
 			printf("Tipo de transporte: Trotinete\n");
@@ -294,8 +292,8 @@ int PresenteListaMeios(ListaMeios* head, Meio* m) {
 int ComparaMeios(Meio* m1, Meio* m2) {
 	if ((m1->id == m2->id) &&
 		(m1->autonomia == m2->autonomia) &&
-		(m1->geocodigo == m2->geocodigo) &&
-		(m1->tipo == m2->tipo)
+		(m1->tipo == m2->tipo) &&
+		(m1->alugado == m2->alugado)
 		) {
 		return 1;
 	}

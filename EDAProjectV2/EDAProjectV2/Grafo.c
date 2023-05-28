@@ -898,3 +898,26 @@ int MostraAdjs(Adjacente* adjs){
 	}
 	return 1;
 }
+
+//DONE - WORKING
+/**
+ * Função que coloca todos os Vertices como Não visitados.
+ * 
+ * Retorna o Grafo com todos os Vertices como Não visitados.
+ * 
+ * Resultado = 0 caso o Grafo esteja vazio.
+ * Resultado = 1 caso opere sobre o Grafo com sucesso.
+ */
+Vertice* ResestVerticesVisitados(Vertice* grafo, int* resultado) {
+	if (grafo == NULL) {
+		*resultado = 0;
+		return grafo;
+	}
+	Vertice* aux;
+	while (aux != NULL) {
+		aux->visitado = false;
+		aux = aux->nextVertice;
+	}
+	*resultado = 1;
+	return grafo;
+}

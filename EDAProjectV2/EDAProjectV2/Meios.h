@@ -30,8 +30,8 @@ typedef enum tipoTransporte {
 typedef struct meiosMobilidadeEletricos {
 	int id;
 	int autonomia;
-	int geocodigo;
 	TipoTransporte tipo;
+	bool alugado;
 } Meio;
 
 /**

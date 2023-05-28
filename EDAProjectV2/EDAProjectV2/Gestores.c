@@ -78,11 +78,10 @@ ListaGestores* LerGestores(char fileName[], int* resultado) {
 		resultado = 0;
 		return 0;
 	}
-
-	Gestor aux;              //Não é apontador aqui
+	Gestor aux;
 	while (!feof(fGestores)) {
-		fscanf(fGestores, "%d;%d;%s\n", &aux.nif, &aux.idade, aux.nome);           //nas strings nao precisa do &
-		head = InserirGestores(head, &aux, &i);                                           //mudar as -> para . n fscanf
+		fscanf(fGestores, "%d;%d;%s\n", &aux.nif, &aux.idade, aux.nome);
+		head = InserirGestores(head, &aux, &i);
 	}
 	fclose(fGestores);
 	resultado = 1;
@@ -107,8 +106,7 @@ ListaGestores* LerGestoresBin(char fileName[], int* resultado) {
 		resultado = 0;
 		return 0;
 	}
-
-	Gestor aux;           //Não é apontador
+	Gestor aux;
 	while (fread(&aux, 1, sizeof(Gestor), fGestoresBin)) {
 		head = InserirGestores(head, &aux, &i);
 	}
